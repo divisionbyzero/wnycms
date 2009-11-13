@@ -1,0 +1,17 @@
+tmp/
+log/
+config/database.yml
+db/migration_snapshot.yml
+db/*.sql
+coverage
+doc/routes.txt
+db/development_structure.sql
+public/stylesheets/*
+*.swp
+*~
+public/**/*_cache.*
+data
+db/*.sqlite3
+TAGS
+
+# NOTE: public/stylesheets/* ignored because of using SASS to generate css (more later)
