@@ -1,0 +1,8 @@
+- form_for(@user_session, :url => login_path) do |form|
+  %label Email:
+  = form.text_field :email
+
+  %label Password:
+  = form.password_field :password
+
+  = form.submit "Login"

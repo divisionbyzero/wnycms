@@ -1,0 +1,55 @@
+!!! Strict
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" => "en", :lang => "en" }
+  %head
+    %meta{"http-equiv" => "Content-Type",     :content => "text/html; charset=utf-8" }
+    %meta{"http-equiv" => "Content-Language", :content => "en" }
+    %meta{:name => "keywords",    :content => "wnyrug"}
+    %meta{:name => "description", :content => "WNY Ruby Users Group Content Management System"}
+    %meta{:name => "author",      :content => "WNY Ruby Users Group" }
+
+    %title
+      WNY Ruby CMS
+
+    = stylesheet_link_tag "formtastic", "application", "formtastic_changes", :cache => "base"
+
+  %body
+    %a{:name => "top"}
+    #header
+      %h1.title
+        %img.float-right{:src => "/images/ruby_64.png", :class => "ruby"}
+        %a{:href => "/"}
+          WNY Ruby CMS
+
+      - if @tagline
+        .tagline.text-large
+          = @tagline
+
+      - if current_user
+        = current_user.name
+        logged in
+
+    %a{:name => "content"}
+    #content
+      #left
+        - unless flash[:notice].blank?
+          .notice
+            = flash[:notice]
+
+        = yield
+
+      #right
+        = render :partial => "shared/menu"
+
+    #footer
+      %h1.text-center
+        &copy;
+        = Time.now.year
+        %a{:href => "http://wnyruby.org/"}
+          WNY Ruby Users Group
+
+    %a{:name => "bottom"}
+
+    = render :partial => "shared/google_ajax"
+
+    = javascript_include_tag "application"
+
