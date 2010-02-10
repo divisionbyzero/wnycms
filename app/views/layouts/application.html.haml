@@ -24,9 +24,13 @@
         .tagline.text-large
           = @tagline
 
-      - if current_user
-        = current_user.name
-        logged in
+      %ul
+        - if current_user
+          %li= current_user.name
+          %li= link_to "logout", logout_url
+        - else
+          %li= link_to "login", login_url
+        %li= link_to "new page", new_page_url
 
     %a{:name => "content"}
     #content

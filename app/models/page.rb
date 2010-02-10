@@ -1,4 +1,6 @@
 class Page < ActiveRecord::Base
+  belongs_to :author, :class_name => "User", :foreign_key => "user_id"
+
   before_save :add_slug
 
   validates_presence_of :title

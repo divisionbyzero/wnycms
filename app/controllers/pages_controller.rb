@@ -1,4 +1,8 @@
 class PagesController < ApplicationController
+  inherit_resources
+  before_filter :verify_has_access
+
+  belongs_to :user
 
   def index
     # GET /pages
@@ -9,7 +13,11 @@ class PagesController < ApplicationController
   def show
     # GET /pages/:id
     
-    @page = Page.by_slug(params[:id]).first
+    if @user
+      @page = @user.pages.by_slug(params[:id]).first
+    else
+      @page = Page.by_slug(params[:id]).first
+    end
   end
   
   def new
@@ -22,9 +30,10 @@ class PagesController < ApplicationController
     # POST /pages
     
     @page = Page.new params[:page]
+    @page.author = current_user
     
     if @page.save
-      redirect_to page_path(@page)
+      redirect_to page_path(@page.slug)
     else
       render :action => :new
     end
@@ -55,6 +64,13 @@ class PagesController < ApplicationController
     @page.destroy
     
     redirect_to pages_path
+  end
+
+  def verify_has_access
+    @page = Page.by_slug(params[:id]).first
+    unless current_user && current_user == @page.author
+      redirect_to root_url
+    end
   end
   
 end

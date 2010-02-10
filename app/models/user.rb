@@ -3,4 +3,6 @@ class User < ActiveRecord::Base
     config.login_field :email
     config.crypto_provider = Authlogic::CryptoProviders::BCrypt
   end
+
+  has_many :pages
 end

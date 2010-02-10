@@ -2,4 +2,4 @@
   - @pages.each do |page|
     %li
       = link_to page.title, page_url(page.slug)
-  
+      %span= link_to "(edit)", edit_page_url(page.slug)

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
         redirect_to root_path
       else
         flash[:notice] = "Login unsuccessful :("
+        redirect_to login_path
       end
     end
   end
