@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def show
     # GET /pages/:id
     
-    @page = Page.find params[:id]
+    @page = Page.by_slug(params[:id]).first
   end
   
   def new
@@ -33,16 +33,16 @@ class PagesController < ApplicationController
   def edit
     # GET /pages/:id/edit
     
-    @page = Page.find params[:id]
+    @page = Page.by_slug(params[:id]).first
   end
   
   def update
     # PUT /pages/:id
     
-    @page = Page.find params[:id]
+    @page = Page.by_slug(params[:id]).first
 
     if @page.update_attributes params[:page]
-      redirect_to pages_path
+      redirect_to page_url(@page.slug)
     else
       render :action => :edit
     end
