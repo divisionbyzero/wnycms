@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  inherit_resources
+  
   def login
     @user_session = UserSession.new(params[:user_session])
     if request.post?
@@ -19,4 +20,10 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    show! do |success, failure|
+      @comments = @user.comments.oldest.top(5)
+    end
+  end
+  
 end

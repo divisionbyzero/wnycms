@@ -1,0 +1,15 @@
+%h2.user_name= @user.name
+
+%h3 Comments
+
+- @comments.each do |comment|
+  %div.comment
+    %p
+      Page
+      = link_to comment.page.title, page_path(comment.page)
+    %p
+      When
+      = comment.created_at.strftime(ApplicationHelper::DEFAULT_DATE_TIME_FORMAT)
+    %p
+      Text
+      = comment.body

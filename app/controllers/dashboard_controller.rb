@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
 
   def index
-    render
+    @pages = Page.alphebetized
   end
 
 end

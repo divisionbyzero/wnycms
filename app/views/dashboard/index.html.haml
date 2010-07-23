@@ -1,13 +1,12 @@
-%table
-  %thead
-    %tr
-      %th
-        a
-      %th
-        b
-  %tbody
-    %tr
-      %td
-        c
-      %td
-        d
+%h2
+  This is the WNY Ruby CMS
+  
+- @pages.each do |page|
+  .page_block
+    .page_title
+      = link_to page.title, page
+    %hr
+    = short_form page
+    .page_comments
+      = page.comments.count
+      = " Comments"

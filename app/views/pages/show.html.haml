@@ -1,4 +1,16 @@
 %h2.page_title= @page.title
+
 = link_to "edit", edit_page_url(@page.slug)
+
 %div.page_content
   = @page.body
+  
+%div.comments
+  - @comments.each do |comment|
+    %div.comment
+      = comment.body
+  %div.new_comment
+    - semantic_form_for [@page, @comment] do |f|
+      = f.input :body
+      = f.buttons
+    

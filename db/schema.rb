@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100113040817) do
+ActiveRecord::Schema.define(:version => 20100319001153) do
+
+  create_table "comments", :force => true do |t|
+    t.text     "body"
+    t.integer  "author_id"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["author_id"], :name => "index_comments_on_author_id"
+  add_index "comments", ["created_at"], :name => "index_comments_on_created_at"
+  add_index "comments", ["page_id"], :name => "index_comments_on_page_id"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -17,10 +29,12 @@ ActiveRecord::Schema.define(:version => 20100113040817) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug",       :null => false
+    t.string   "slug"
+    t.integer  "user_id"
   end
 
   add_index "pages", ["slug"], :name => "index_pages_on_slug"
+  add_index "pages", ["user_id"], :name => "index_pages_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "alias",               :limit => 16

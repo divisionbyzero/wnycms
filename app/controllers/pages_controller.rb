@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   inherit_resources
-  before_filter :verify_has_access
+  before_filter :verify_has_access, :except => [:new, :create, :index]
 
   belongs_to :user
 
@@ -18,6 +18,12 @@ class PagesController < ApplicationController
     else
       @page = Page.by_slug(params[:id]).first
     end
+    
+    @comment = Comment.new do |comment|
+      comment.page = @page
+    end
+    
+    @comments = @page.comments.oldest
   end
   
   def new

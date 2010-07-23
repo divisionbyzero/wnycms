@@ -24,7 +24,7 @@
         .tagline.text-large
           = @tagline
 
-      %ul
+      %ul.login
         - if current_user
           %li= current_user.name
           %li= link_to "logout", logout_url

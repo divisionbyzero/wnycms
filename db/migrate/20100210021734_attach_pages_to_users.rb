@@ -1,6 +1,6 @@
 class AttachPagesToUsers < ActiveRecord::Migration
   def self.up
-    add_column :pages, :user_id, :integer, :null => false
+    add_column :pages, :user_id, :integer
     add_index :pages, :user_id
   end
 
